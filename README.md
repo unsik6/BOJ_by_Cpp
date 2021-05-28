@@ -2,5 +2,5 @@
 
 // unsik6
 // Inha University
-// major in Computer Engineering
+// major in Computer Science
 // major in Politics and Diplomacy
