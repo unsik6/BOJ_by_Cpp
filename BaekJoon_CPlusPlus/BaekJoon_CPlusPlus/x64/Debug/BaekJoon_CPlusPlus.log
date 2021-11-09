@@ -1,6 +1,2 @@
-﻿  1010_BaekJoon.cpp
-C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\1010_BaekJoon.cpp(19,25): warning C4244: '초기화 중': 'double'에서 'size_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\1010_BaekJoon.cpp(20,25): warning C4244: '초기화 중': 'double'에서 'size_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\1010_BaekJoon.cpp(32,28): warning C4244: '*=': 'double'에서 'unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\1010_BaekJoon.cpp(33,30): warning C4244: '*=': 'double'에서 'unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  1004_BaekJoon.cpp
   BaekJoon_CPlusPlus.vcxproj -> C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\x64\Debug\BaekJoon_CPlusPlus.exe

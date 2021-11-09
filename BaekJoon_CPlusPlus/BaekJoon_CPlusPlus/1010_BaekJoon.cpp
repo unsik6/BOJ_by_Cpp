@@ -36,5 +36,6 @@ int main()
 		std::cout << MFactorial/limFactoial << "\n";
 	}
 
+	delete N, M;
 	return 0;
 }
