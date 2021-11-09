@@ -3,4 +3,4 @@
 // major in Computer Science
 // major in Politics and Diplomacy
 
-// GameMakers
+// .NETers of Inha Univ.
