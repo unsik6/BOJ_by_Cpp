@@ -11,9 +11,7 @@
 //			  (정수) 1 <= r <= 1000, 1 <= n <= 50
 
 // 조건 1)에 의하여 행성계 내의 이동 중에는 진입/이탈이 발생하지 않는다.
-// 즉, 출발점과 도착점이 모두 포함된 계를 찾은 후,
-// 출발점과 도착점에 대하여 각각 얼마나 깊숙히 있는지를 도출한다.
-// 그리고 그 값을 더해준다.
+// 즉, 출발점과 도착점이 어떤 계의 경계로 인하여 안과 밖으로 나뉘는 경우에만 진입/이탈이 발생한다.
 
 // 좌표들과 반지름의 조건에 의하여, 원의 방정식의 값들의 결과의 최대가 2*10^6이다. int 가능
 
@@ -27,55 +25,46 @@ int main()
 	int arrPoslen = T * 4;
 	int* arrPos = new int[arrPoslen];					// 모든 출발점과 도착점 좌표
 	int* arrSystemCnt = new int[T];						// 모든 행성계 개수
-	int** arrSystems = new int*[T];						// 모든 행성계 정보
+	int*** arrSystems = new int**[T];					// 모든 행성계 정보: 1차원 = test, 2차원 = 행성계, 3차원 = 행성계 정보
 
-	for (int i = 0; i < T; i++)
+	for (int t = 0; t < T; t++)
 	{
-		cin >> arrPos[4 * i] >> arrPos[1 + 4 * i]
-			>> arrPos[2 + 4 * i] >> arrPos[3 + 4 * i];
-		cin >> arrSystemCnt[i];
-		int SystemInfoCnt = 3 * arrSystemCnt[i];
-		arrSystems[i] = new int[SystemInfoCnt];
-		for (int f = 0; f < arrSystemCnt[i]; f++)
+		cin >> arrPos[4 * t] >> arrPos[1 + 4 * t]
+			>> arrPos[2 + 4 * t] >> arrPos[3 + 4 * t];
+		cin >> arrSystemCnt[t];
+		arrSystems[t] = new int* [arrSystemCnt[t]];
+		for (int s = 0; s < arrSystemCnt[t]; s++)
 		{
-			int SystemNInfo = 3 * f;
-			cin >> arrSystems[i][SystemNInfo] >> arrSystems[i][1 + SystemNInfo]
-				>> arrSystems[i][2 + SystemNInfo];
-			cout << f << "번째 정보: " << arrSystems[i][SystemNInfo]
-				<< " " << arrSystems[i][1 + SystemNInfo]
-				<< " " << arrSystems[i][2 + SystemNInfo];
+			arrSystems[t][s] = new int[3];
+			cin >> arrSystems[t][s][0] >> arrSystems[t][s][1]
+				>> arrSystems[t][s][2];
 		}
-	}
 
-	for (int i = 0; i < T; i++)
-	{
-		int startPosLevel{ 0 }, endPosLevel{ 0 };
-		for (int f = 0; f < arrSystemCnt[i]; f++)
+		int otherCnt{ 0 };
+		for (int s = 0; s < arrSystemCnt[t]; s++)
 		{
 			bool IsStartIn{ false }, IsEndIn{ false };
-			int tmpStartXfunct = arrSystems[i][3 * f] - arrPos[4 * i];
-			int tmpStartYfunct = arrSystems[i][1 + 3 * f] - arrPos[1 + 4 * i];
-			int tmpEndXfunct = arrSystems[i][3 * f] - arrPos[2 + 4 * i];
-			int tmpEndYfunct = arrSystems[i][1 + 3 * f] - arrPos[3 + 4 * i];
+			int tmpStartXfunct = arrSystems[t][s][0] - arrPos[4 * t];
+			int tmpStartYfunct = arrSystems[t][s][1] - arrPos[1 + 4 * t];
+			int tmpEndXfunct = arrSystems[t][s][0] - arrPos[2 + 4 * t];
+			int tmpEndYfunct = arrSystems[t][s][1] - arrPos[3 + 4 * t];
 
-			if (tmpStartXfunct * tmpStartXfunct + tmpStartYfunct * tmpStartYfunct < arrSystems[i][2 + 3 * f])
-			{
-				startPosLevel++;
+			if (tmpStartXfunct * tmpStartXfunct +
+				tmpStartYfunct * tmpStartYfunct < arrSystems[t][s][2] * arrSystems[t][s][2])
 				IsStartIn = true;
-			}
-			if (tmpEndXfunct * tmpEndXfunct + tmpEndYfunct * tmpEndYfunct < arrSystems[i][2 + 3 * f])
-			{
-				endPosLevel++;
+			if (tmpEndXfunct * tmpEndXfunct +
+				tmpEndYfunct * tmpEndYfunct < arrSystems[t][s][2] * arrSystems[t][s][2])
 				IsEndIn = true;
-			}
-			if (IsStartIn * IsEndIn != 0) break;
+			if (IsStartIn != IsEndIn) otherCnt++;
 		}
 
-		cout << startPosLevel + endPosLevel << "\n";
+		cout << otherCnt << "\n";
 	}
 
 	delete[] arrPos, arrSystemCnt;
 	for (int i = 0; i < T; i++)
 		delete[] arrSystems[i];
 	delete[] arrSystems;
+
+	return 0;
 }
