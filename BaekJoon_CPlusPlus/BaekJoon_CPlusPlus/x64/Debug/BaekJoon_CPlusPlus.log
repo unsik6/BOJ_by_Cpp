@@ -1,4 +1,2 @@
-﻿  1072_BaekJoon.cpp
-C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\1072_BaekJoon.cpp(14,8): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\1072_BaekJoon.cpp(29,11): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  1094_BaekJoon.cpp
   BaekJoon_CPlusPlus.vcxproj -> C:\Users\tlsgu\Documents\GitHub\BaekJoonTest\BaekJoon_CPlusPlus\x64\Debug\BaekJoon_CPlusPlus.exe
