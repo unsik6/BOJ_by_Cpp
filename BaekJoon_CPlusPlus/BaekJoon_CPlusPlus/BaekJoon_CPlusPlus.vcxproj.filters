@@ -18,67 +18,70 @@
     <ClCompile Include="BaekJoon_CPlusPlus.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1038_BaekJoon.cpp">
+    <ClCompile Include="2869_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1002_BaekJoon.cpp">
+    <ClCompile Include="2581_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1057_BaekJoon.cpp">
+    <ClCompile Include="2292_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1003_BaekJoon.cpp">
+    <ClCompile Include="1712_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="2581_BaekJoon.cpp">
+    <ClCompile Include="1193_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1019_BaekJoon.cpp">
+    <ClCompile Include="1181_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1181_BaekJoon.cpp">
+    <ClCompile Include="1158_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1158_BaekJoon.cpp">
+    <ClCompile Include="1094_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1024_BaekJoon.cpp">
+    <ClCompile Include="1072_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1010_BaekJoon.cpp">
+    <ClCompile Include="1065_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1004_BaekJoon.cpp">
+    <ClCompile Include="1057_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1012_BaekJoon.cpp">
+    <ClCompile Include="1038_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1021_BaekJoon.cpp">
+    <ClCompile Include="1024_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1072_BaekJoon.cpp">
+    <ClCompile Include="1021_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1094_BaekJoon.cpp">
+    <ClCompile Include="1019_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="15596_BaekJoon.cpp">
+    <ClCompile Include="1002_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="4673_BaekJoon.cpp">
+    <ClCompile Include="1003_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1065_BaekJoon.cpp">
+    <ClCompile Include="1004_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1712_BaekJoon.cpp">
+    <ClCompile Include="1010_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="2292_BaekJoon.cpp">
+    <ClCompile Include="1012_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1193_BaekJoon.cpp">
+    <ClCompile Include="4673_BOJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15596_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
