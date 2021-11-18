@@ -35,5 +35,10 @@ int main()
 			}
 		}
 		cout << prefloor[ns[i] - 1] << endl;
+
+		delete[] prefloor;
+		delete[] targetfloor;
 	}
+	delete[] ks;
+	delete[] ns;
 }

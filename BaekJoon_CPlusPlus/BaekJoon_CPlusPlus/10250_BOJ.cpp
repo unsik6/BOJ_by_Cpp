@@ -25,5 +25,7 @@ int main()
 		int floor = (Ns[i] % Hs[i] == 0 ? Hs[i] : Ns[i] % Hs[i]);
 		cout << floor * 100 + row << endl;
 	}
-	delete[] Hs, Ws, Ns;
+	delete[] Hs;
+	delete[] Ws;
+	delete[] Ns;
 }
