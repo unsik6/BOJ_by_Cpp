@@ -4,6 +4,51 @@
 // condition: 첫 이동과 마지막 이동은 1이다.
 //			  i번째에 k만큼 이동했다면 i+1번째 이동은 k-1, k, k+1 만큼만 이동할 수 있다.
 
+// 두번째 풀이
+// 풀이 자체는 두번째 풀이 참조
+// 시간초과의 원인: length의 최대가 2^31이므로 n++로 n 찾는데 오래걸림
+// 연산 시 int 오버플로우 발생 => long long
+
+// 그냥 출력할 때, 나중에 넣으려고 개행 안 넣었는데 그거 때매 틀렸습니다 양산
+
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	long long T;
+	cin >> T;
+	long long* arrX = new long long[T];
+	long long* arrY = new long long[T];
+	for (int t = 0; t < T; t++) cin >> arrX[t] >> arrY[t];
+	for (int t = 0; t < T; t++)
+	{
+		long long length = arrY[t] - arrX[t];
+		long long n{ 1 };
+		while (n * n <= length) n++;
+		n--;
+
+		if (length == n * n) cout << 2 * n - 1 << endl;
+		else
+		{
+			length -= n * n;
+			cout << 2 * n - 1 + (length <= n ? 1 : 2) << endl;
+		}
+		
+		// 올림 활용 예제
+		/*length = ceil((double)(length - n * n) / n);
+		cout << 2 * n - 1 + length << endl;*/
+
+		// 범위 직접 구현 예제
+		/*if (length == n * n) cout << n + n - 1 << endl;
+		else if (n * n < length && length <= n + n * n) cout << n + n << endl;
+		else if (length > n * n + n && length < (n + 1) * (n + 1)) cout << n + n + 1 << endl;*/
+	}
+}
+
+
+
 // 첫번째 풀이: 시간 초과
 
 // 2^31보다 작으므로 int 범위 내에 있다.
