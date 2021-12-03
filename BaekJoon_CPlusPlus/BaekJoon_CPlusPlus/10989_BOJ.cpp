@@ -6,7 +6,29 @@
 // using Counting Sort Algorithm
 
 
+#include<iostream>
+using namespace std;
 
+int main()
+{
+	// C와 C++의 표준 stream의 동기화를 끊어서 cin과 cout의 속도를 높여야 시간초과가 나타나지 않는다.
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int N, n;
+	cin >> N;
+	int* count = new int[10001]{ 0 };
+	for (int i = 0; i < N; i++)
+	{
+		cin >> n;
+		count[n]++;
+	}
+	for (int i = 1; i < 10001; i++)
+		for (int f = 0; f < count[i]; f++)
+			cout << i << '\n';
+	return 0;
+}
 
 
 // 첫번째: 동적 리스트를 이용한 Counting Sort : 메모리 초과
