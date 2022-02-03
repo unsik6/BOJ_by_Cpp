@@ -3,29 +3,107 @@
 // input: 1 <= N = 정수 개수 <= 1,000
 //		  |x| <= 1,000 (중복 안됨)
 
-#include<iostream>
+// bubble sort
 
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	// input N is the size of array.
+//	int N;
+//	cin >> N;
+//
+//	// initialize new array whose size is N.
+//	int* arr = new int[N];
+//	for (int i = 0; i < N; i++)
+//		cin >> arr[i];
+//
+//	for (int i = 0; i < N - 1; i++)
+//	{
+//		for (int j = 0; j < N - i - 1; j++)
+//		{
+//			if (arr[j] > arr[j + 1])
+//			{
+//				int temp = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = temp;
+//			}
+//		}
+//	}
+// 
+// // print output.
+//	for (int k = 0; k < N; k++) cout << arr[k] << '\n';
+//
+//	delete[] arr;
+//}
+
+// insertion sort
+
+//#include<iostream>
+//using namespace std;
+//int main()
+//{
+//	// input N is the size of array.
+//	int N;
+//	cin >> N;
+//
+//	// initialize new array whose size is N.
+//	int* arr = new int[N];
+//	for (int i = 0; i < N; i++)
+//		cin >> arr[i];
+//
+//	for (int i = 1; i < N; i++)
+//	{
+//		int key = arr[i];
+//		for (int j = i - 1; j >= 0; j--)
+//		{
+//			if (key < arr[j])
+//			{
+//				arr[j + 1] = arr[j];
+//				arr[j] = key;
+//			}
+//			else
+//				break;
+//		}
+//	}
+//
+//	// print output.
+//	for (int k = 0; k < N; k++) cout << arr[k] << '\n';
+//
+//	delete[] arr;
+//}
+
+// selection sort
+
+#include<iostream>
+using namespace std;
 int main()
 {
+	// input N is the size of array.
 	int N;
-	std::cin >> N;
+	cin >> N;
+
+	// initialize new array whose size is N.
 	int* arr = new int[N];
-	for (int i = 0; i < N; i++) std::cin >> arr[i];
-	int* result = new int[N];
-	for (int i = 1; i < N; i++) result[i] = 1000;
-	result[0] = arr[0];
-	for (int i = 1; i < N; i++)
+	for (int i = 0; i < N; i++)
+		cin >> arr[i];
+
+	for (int i = 0; i < N - 1; i++)
 	{
-		for (int f = 0; f < N; f++)
+		int minIdx = i;
+		for (int j = i + 1 ; j < N; j++)
 		{
-			if (arr[i] < result[f])
-			{
-				for (int k = N -1; k > f; k--)
-					result[k] = result[k - 1];
-				result[f] = arr[i];
-				break;
-			}
+			minIdx = (arr[minIdx] > arr[j] ? j : minIdx);
 		}
+		if (minIdx == i) continue;
+
+		int temp = arr[minIdx];
+		arr[minIdx] = arr[i];
+		arr[i] = temp;		
 	}
-	for (int i = 0; i < N; i++) std::cout << result[i] << '\n';
+
+	// print output.
+	for (int k = 0; k < N; k++) cout << arr[k] << '\n';
+
+	delete[] arr;
 }
