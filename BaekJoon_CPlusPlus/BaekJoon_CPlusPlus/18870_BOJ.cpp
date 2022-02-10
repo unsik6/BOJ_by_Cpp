@@ -28,9 +28,9 @@ public:
 		this->m_heapSize = 0;
 		this->m_lastIdx = 0;
 		this->m_arr = new pair<int, int>[_size + 1];
-		for (int i = 0; i < m_capacity; i++)
+		for (int i = 0; i <= _size; i++)
 		{
-			m_arr[i].first = none;
+			m_arr[i].first = -1;
 			m_arr[i].second = -1;
 		}
 	}
