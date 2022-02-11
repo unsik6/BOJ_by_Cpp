@@ -195,5 +195,8 @@
     <ClCompile Include="11401_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="2740_BOJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
