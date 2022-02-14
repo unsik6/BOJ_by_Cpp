@@ -156,7 +156,7 @@ int main()
 // using Randomized QuickSort
 
 // the result of the solution using the source code below is TIMELIMIT.
-// Because the quickSort doesn't insure O(nlogn) time, I need to solve the problem using the heapSort or the MergeSort.
+// Because the quickSort doesn't ensure O(nlogn) time, I need to solve the problem using the heapSort or the MergeSort.
 // and exclude the additional functions or library using time.
 
 
