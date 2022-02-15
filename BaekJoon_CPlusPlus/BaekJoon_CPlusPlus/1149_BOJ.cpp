@@ -34,7 +34,7 @@ int main()
 		cin >> rgbArr[i][0] >> rgbArr[i][1] >> rgbArr[i][2];
 	}
 		
-	// optimal solution memorization array
+	// optimal solution memoziation array
 	int** solution = new int*[N];
 	for (int i = 0; i < N; i++)
 		solution[i] = new int[3];

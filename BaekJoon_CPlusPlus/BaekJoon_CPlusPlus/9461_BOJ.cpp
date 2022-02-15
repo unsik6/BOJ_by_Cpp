@@ -22,7 +22,7 @@ int main()
 		int N;
 		cin >> N;
 
-		// memorization array
+		// memoziation array
 		long long* arr = new long long[N];
 		if (N > 0) arr[0] = 1;
 		if (N > 1) arr[1] = 1;
