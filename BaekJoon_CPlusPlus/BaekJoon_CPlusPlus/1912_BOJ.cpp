@@ -5,8 +5,12 @@
 
 // condition: 연속하는 합의 최대 값
 
-
-// [n, n] 매트릭스를 이용한다. [i, j]는 i부터 j까지의 부분 수열의 합이다. (0 <= i <= j <= n-1)
+// dp[i]는 a[i]를 맨끝으로 하는 연속된 부분수열의 합이다.
+// dp[i-1] + a[i]이지만,
+// dp[i-1] + a[i] < a[i]라면 굳이 가져올 필요가 없으므로, a[i]가 된다.
+// 이 경우, dp[i-1]은 a[i]를 만나기 전까지의 최대이므로
+// a[i]를 포함하는 a[i]보다 낮은 수열의 합의 최대를 포함한다.
+// a[i]를 중간에 포함하거나, 첫번째로 포함하는 부분수열의 합은 dp[j] (i <= j)이다.
 
 #include<iostream>
 using namespace std;
@@ -16,31 +20,20 @@ int main()
 	int n;
 	cin >> n;
 
-	int** mat = new int* [n];
+	int* arr = new int[n];
 	for (int i = 0; i < n; i++)
-	{
-		mat[i] = new int[n];
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		//  [i, i]이므로 a[i]가 최대합이다.
-		cin >> mat[i][i];
-	}
-
+		cin >> arr[i];
+	int* dp = new int[n];
+	dp[0] = arr[0];
+	int totalMax = dp[0];
 	for (int i = 1; i < n; i++)
 	{
-		for (int f = i - 1; f >= 0; f--)
-		{
-			int max = mat[i - 1][f];
-			if (max < mat[i][f + 1]) max = mat[i][f + 1];
-			int sum = 0;
-			for (int k = f; k <= f; k++)
-				sum += mat[k][k];
-			if (max < sum) max = sum;
+		int max = dp[i - 1] + arr[i];
+		if (max < arr[i]) max = arr[i];
 
-			mat[i][f] = max;
-		}
+		dp[i] = max;
+		if (totalMax < dp[i]) totalMax = dp[i];
 	}
-	cout << mat[n - 1][n - 1];
+
+	cout << totalMax;
 }
