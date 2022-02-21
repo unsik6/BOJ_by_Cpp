@@ -231,10 +231,13 @@
     <ClCompile Include="11054_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="2565_BOJcpp.cpp">
+    <ClCompile Include="2565_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="9251_BOJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1912_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
