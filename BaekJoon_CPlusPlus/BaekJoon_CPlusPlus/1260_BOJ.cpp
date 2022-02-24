@@ -11,6 +11,7 @@
 #include <queue>
 using namespace std;
 
+
 void DFS(int _v, int** _inciMat, int _N, bool* _isEx)
 {
 	_isEx[_v] = true;
@@ -23,6 +24,8 @@ void DFS(int _v, int** _inciMat, int _N, bool* _isEx)
 		}
 	}
 }
+
+
 
 int main()
 {
@@ -46,25 +49,32 @@ int main()
 	bool* isExplored = new bool[N + 1]{ false };
 	// recursion
 	/*DFS(V, incidentArr, N + 1, isExplored);*/
-	int* stack = new int[N + 1]{ 0 };
+	// iteration
+	// stack needs O(N^2) space
+	// so in some case, recursion needs less space.
+	// and in iteration implementation, vector is better than static stack.
+	int stackSize = N * N + 1;
+	int* stack = new int[stackSize]{0};
 	int top = 0;
 	stack[++top] = V;
 	while (top > 0)
 	{
 		int cur = stack[top--];
-		if (!isExplored[cur])
+		if (isExplored[cur]) continue;
+		isExplored[cur] = true;
+		cout << cur << ' ';
+		for (int j = N; j > 0; j--)
 		{
-			isExplored[cur] = true;
-			cout << cur << ' ';
-
-			for (int j = N; j > 0; j--)
+			if (incidentArr[cur][j] > 0 && !isExplored[j])
 			{
-				if (incidentArr[cur][j] > 0 && !isExplored[j])
-				{
-					stack[++top] = j;
-				}
+				stack[++top] = j;
 			}
 		}
+
+		/*cout << "\n top = " << top << "stack : ";
+		for (int i = 0; i <= top; i++)
+			cout << stack[i] << ' ';
+		cout << '\n';*/
 	}
 
 	cout << '\n';
@@ -83,7 +93,6 @@ int main()
 			{
 				// check explored
 				incidentArr[i][i] = 1;
-
 				incidentArr[curV][i] = 0;
 				incidentArr[i][curV] = 0;
 				lvls.push(i);
