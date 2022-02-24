@@ -44,6 +44,7 @@ int main()
 
 	// DFS
 	bool* isExplored = new bool[N + 1]{ false };
+	// recursion
 	/*DFS(V, incidentArr, N + 1, isExplored);*/
 	int* stack = new int[N + 1]{ 0 };
 	int top = 0;
