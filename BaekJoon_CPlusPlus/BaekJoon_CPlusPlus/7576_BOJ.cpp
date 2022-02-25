@@ -21,37 +21,41 @@
 // 그러면 결국 탐색시 겹치는 토마토가 급격하게 줄어들며, 겹치는 경우가 가장 많은 최악의 경우에는 O(N*M /2)이므로
 // O(N*M)시간에 수행할 수 있다.
 
+// 계속된 시간초과...
+// 처음에 레벨을 계산하는 방식은 현재 레벨, 현재 레벨의 정점 수,
+// 다음 레벨의 정점을 각각의 변수로 구성했다.
+// 그래서 처음에 익어있는 토마토별로 BFS를 구성해야 했고, 시간초과가 났다.
+// 그러나 레벨을 각 정점별로 저장하면 현재 레벨에 +1만 하면 됐고,
+// 처음에 익어있는 토마토도 그냥 큐에 넣어 돌리면 될 뿐이었다..
+
 #include <iostream>
-#include <vector>
 #include <queue>
 using namespace std;
 
 int NeverExplored = 10000001;
+int pmR[4] = { -1, 1, 0, 0 };
+int pmC[4] = { 0, 0, 1, -1 };
 
 int main()
 {
 	int N, M;
 	cin >> N >> M;
 
-	vector<int> firstRipen;
+	queue<int> explored;
+
 	int** mat = new int* [M];
+	int** lvlMat = new int* [M];
 	for (int i = 0; i < M; i++)
 	{
 		mat[i] = new int[N] {-1};
+		lvlMat[i] = new int[N];
+
 		for (int f = 0; f < N; f++)
 		{
 			cin >> mat[i][f];
 			if (mat[i][f] == 1)
-				firstRipen.push_back(i * N + f);
-		}
-	}
+				explored.push(i * N + f);
 
-	int** lvlMat = new int* [M];
-	for (int i = 0; i < M; i++)
-	{
-		lvlMat[i] = new int[N];
-		for (int f = 0; f < N; f++)
-		{
 			if (mat[i][f] == 1) lvlMat[i][f] = 0;
 			else if (mat[i][f] == -1) lvlMat[i][f] = -1;
 			else lvlMat[i][f] = NeverExplored;
@@ -59,89 +63,47 @@ int main()
 	}
 
 	// start BFS to all firstRipen
-	for (int start : firstRipen)
+	while (!explored.empty())
 	{
-		queue<int> explored;
-		explored.push(start);
-		int nextLvl = 1;
-		int curLvlElemsCnt = 1;
-		int nextLvlElemCnt = 0;
-		while (!explored.empty())
+		int cur = explored.front();
+		int curCol = cur % N;
+		int curRow = (cur - curCol) / N;
+		explored.pop();
+		for (int i = 0; i < 4; i++)
 		{
-			int curVertex = explored.front();
-			int curCol = curVertex % N;
-			int curRow = (curVertex - curCol) / N;
-			explored.pop();
-			curLvlElemsCnt--;
-
-			if (curRow > 0)
+			int tarRow = curRow + pmR[i];
+			int tarCol = curCol + pmC[i];
+			if (tarRow >= 0 && tarRow < M && tarCol >= 0 && tarCol < N)
 			{
-				if (mat[curRow - 1][curCol] == 0
-					&& lvlMat[curRow - 1][curCol] > nextLvl)
+				if (mat[tarRow][tarCol] == 0
+					&& lvlMat[tarRow][tarCol] > lvlMat[curRow][curCol] + 1)
 				{
-					lvlMat[curRow - 1][curCol] = nextLvl;
-					explored.push((curRow - 1) * N + curCol);
-					nextLvlElemCnt++;
+					explored.push(tarRow * N + tarCol);
+					lvlMat[tarRow][tarCol] = lvlMat[curRow][curCol] + 1;
 				}
-			}
-			if (curRow < M - 1)
-			{
-				if (mat[curRow + 1][curCol] == 0
-					&& lvlMat[curRow + 1][curCol] > nextLvl)
-				{
-					lvlMat[curRow + 1][curCol] = nextLvl;
-					explored.push((curRow + 1) * N + curCol);
-					nextLvlElemCnt++;
-				}
-			}
-			if (curCol > 0)
-			{
-				if (mat[curRow][curCol - 1] == 0
-					&& lvlMat[curRow][curCol - 1] > nextLvl)
-				{
-					lvlMat[curRow][curCol - 1] = nextLvl;
-					explored.push(curRow * N + (curCol - 1));
-					nextLvlElemCnt++;
-				}
-			}
-			if (curCol < N -1)
-			{
-				if (mat[curRow][curCol + 1] == 0
-					&& lvlMat[curRow][curCol + 1] > nextLvl)
-				{
-					lvlMat[curRow][curCol + 1] = nextLvl;
-					explored.push(curRow * N + (curCol + 1));
-					nextLvlElemCnt++;
-				}
-			}
-
-			if (curLvlElemsCnt == 0)
-			{
-				nextLvl++;
-				curLvlElemsCnt = nextLvlElemCnt;
-				nextLvlElemCnt = 0;
 			}
 		}
 	}
+	
+
 	int max = 0;
 	for (int i = 0; i < M; i++)
 	{
-		for (int f = 0; f < N; f++)
+		for (int j = 0; j < N; j++)
 		{
-			if (lvlMat[i][f] == NeverExplored)
+			/*cout << lvlMat[i][j] << ' ';*/
+			if (lvlMat[i][j] == NeverExplored)
 			{
 				max = -1;
 				break;
 			}
-			else if (max < lvlMat[i][f]) max = lvlMat[i][f];
+			if (max < lvlMat[i][j]) max = lvlMat[i][j];
 		}
+		if (max == -1) break;
+		/*cout << endl;*/
 	}
-		
 
 	cout << max;
-
-
-
 
 	for (int i = 0; i < M; i++)
 	{
