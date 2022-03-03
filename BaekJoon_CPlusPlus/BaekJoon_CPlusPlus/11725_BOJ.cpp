@@ -8,6 +8,9 @@
 // DFS using Matrix : Memory limit
 // BFS using Matrix : Memory limit
 
+// edge.size() = O(n) => adjacent list
+// edge.size() = O(n^2) => incident Matrix
+
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -45,4 +48,7 @@ int main()
 	}
 
 	for (int i = 2; i < N + 1; i++) cout << parArr[i] << '\n';
+
+	delete[] adjacent;
+	delete[] parArr;
 }
