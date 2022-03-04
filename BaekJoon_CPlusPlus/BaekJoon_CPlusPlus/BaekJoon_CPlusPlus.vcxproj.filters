@@ -36,7 +36,7 @@
     <ClCompile Include="1181_BOJ.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1158_BOJ.cpp">
+    <ClCompile Include="1158_BOJ_Array.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="1094_BOJ.cpp">
@@ -292,6 +292,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="13398_BOJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1158_Singly_Linked-List.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
