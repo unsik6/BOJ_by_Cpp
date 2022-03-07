@@ -300,5 +300,8 @@
     <ClCompile Include="2346_BOJ_Doubly_Linked_List.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="1026_BOJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
