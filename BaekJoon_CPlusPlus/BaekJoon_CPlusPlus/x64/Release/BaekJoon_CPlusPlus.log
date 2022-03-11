@@ -1,0 +1,9 @@
+﻿  CLRS_Matrix-Chain_Multiplication.cpp
+C:\Users\ShinHyeonJun\Documents\GitHub\BOJ_by_Cpp\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\CLRS_Matrix-Chain_Multiplication.cpp(99,21): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\ShinHyeonJun\Documents\GitHub\BOJ_by_Cpp\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\CLRS_Matrix-Chain_Multiplication.cpp(106,14): warning C4244: '+=': 'double'에서 'clock_t'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  2 of 14 functions (14.3%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  BaekJoon_CPlusPlus.vcxproj -> C:\Users\ShinHyeonJun\Documents\GitHub\BOJ_by_Cpp\BaekJoon_CPlusPlus\x64\Release\BaekJoon_CPlusPlus.exe
