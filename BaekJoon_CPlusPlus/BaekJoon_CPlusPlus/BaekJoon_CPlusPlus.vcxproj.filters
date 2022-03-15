@@ -318,5 +318,8 @@
     <ClCompile Include="2138_BO.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="1285_BOJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
