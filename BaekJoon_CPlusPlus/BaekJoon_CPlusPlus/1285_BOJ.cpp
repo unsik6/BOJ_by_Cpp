@@ -7,46 +7,51 @@
 
 // output: 최소한의 뒷면만 보이도록 했을 때, 최소한의 뒷면 동전의 수
 
-// 1x1, 2x2, 3x3 순으로 서브 프러블럼이 존재한다.
-// 예를 들어 (0,0), (0..1, 0..1) 이런 식이다.
-// 다만, 기존의 문제가 영향을 받지 않게 하기 위해서, i번째 행과 열만 뒤집는다.
-// 이때 경우의 수는 4가지이다.
-//  (1) 안 뒤집는다.
-//  (2) 행만 뒤집는다.
-//  (3) 열만 뒤집는다.
-//  (4) 행과 열 모두 뒤집는다.
-// 이중 최소의 동전의 개수를 갖는 경우를 선택한다.
-
-// 중요한 점은 (i, i)이다.
-// 행을 먼저 뒤집냐, 열을 먼저 뒤집냐에 따라
-// 그 다음 행위에 대한 연산이 달라질 수 있다.
+// 각 행의 뒤집기에 따라 열의 뒤집기가 결정된다.
+// 다만, 문제는 어떤 행을 어떻게 뒤집느냐에 따라 열의 뒤집기가 전부 달라지므로,
+// 행과 열의 뒤집기를 동시에 진행할 수 없다.
+// 예를 들어 1행과 1열을 어떻게 뒤집든
+// 2행과 2열을 어떻게 뒤집느냐에 따라서 1행과 1열의 뒤집는 방식이 다라질 수 있다.
+// 대신 행을 뒤집는 모든 경우에 수에 대해서는
+// 각각의 열에 대해 그리디 알고리즘으로 해결할 수 있다.
+// 이 문제를 풀기 위해서 비트마스킹을 공부했다.
 
 #include <iostream>
+#include <math.h>
 using namespace std;
 
-
-int GetNumOfBackWithSwitchingLines(bool** _mat, int _N, int _lineNum, bool _switchRow, bool _switchCol)
+int minT(int* _rowsBit, int _size, int _curRow)
 {
-	int numOfBack = 0;
-	if (_switchRow)
+	// 재귀는 _curRow가 _size일 때 끝난다. 즉 더이상 고려할 행의 경우의 수가 없다.
+	// 각 열을 뒤집는 경우와 뒤집지 않는 경우를 계산한다.
+	if (_curRow == _size)
 	{
-		for (int f = 0; f < _N; f++)
-			_mat[_lineNum][f] = !_mat[_lineNum][f];
-	}
-	if (_switchCol)
-	{
-		for (int i = 0; i < _N; i++)
-			_mat[i][_lineNum] = !_mat[i][_lineNum];
+		int total = 0;
+		for (int i = 0; i < _size; i++)
+		{
+			int not_flip_col_cnt = 0;
+			for (int j = 0; j < _size; j++)
+			{
+				if (_rowsBit[j] & (1 << i))
+				{
+					not_flip_col_cnt++;
+				}
+			}
+
+			total += min(not_flip_col_cnt, _size - not_flip_col_cnt);
+		}
+
+		return total;
 	}
 
-	for (int i = 0; i < _lineNum; i++)
-	{
-		if (!_mat[_lineNum][i]) numOfBack++;
-		if (!_mat[i][_lineNum]) numOfBack++;
-	}
-	if (!_mat[_lineNum][_lineNum]) numOfBack++;
+	int not_flip_row = minT(_rowsBit, _size, _curRow + 1);
 
-	return numOfBack;
+	// call by pointer이기 때문에 아래처럼 뒤집어주면 앞으로도 계속 뒤집힌 상태로 연산하게 된다.
+	// 하지만 결국 모든 경우의 수를 판단할 수 있게 되므로 상관 없다.
+	_rowsBit[_curRow] = ~_rowsBit[_curRow];
+	int flip_row = minT(_rowsBit, _size, _curRow + 1);
+
+	return min(not_flip_row, flip_row);
 }
 
 int main()
@@ -54,31 +59,26 @@ int main()
 	int N;
 	cin >> N;
 	
-	// true = front, false = back
-	bool** originMat = new bool*[N];
+	// 각 row 별로 비트마스크를 만든다.	
+	int* rowsBitMask = new int[N] {0};
 	for (int i = 0; i < N; i++)
 	{
-		originMat[i] = new bool[N];
-		string inputRow;
-		cin >> inputRow;
-		for (int f = 0; f < N; f++)
-			originMat[i][f] = (inputRow[f] == 'H');
+		string row;
+		cin >> row;
+		for (int j = 0; j < N; j++)
+		{
+			if (row[j] == 'T')
+			{
+				// 1 << j는 j번째 비트만 1로 하는 경우로,
+				// i번째 row의 비트마스크의 j번째 비트를 1로 바꾸주는 것을 의미한다.
+				rowsBitMask[i] |= (1 << j);
+			}
+		}
 	}
 
-	int numOfBack = 0;
-	for (int i = 0; i < N; i++)
-	{
-		
-	}
+	cout << minT(rowsBitMask, N, 0);
 
 
-
-
-
-
-	for (int i = 0; i < N; i++)
-	{
-		delete[] originMat[i];
-	}
-	delete[] originMat;
+	delete[] rowsBitMask;
+	return 0;
 }
