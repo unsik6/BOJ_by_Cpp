@@ -1,3 +1,1 @@
-﻿  11203_BOJ.cpp
-C:\Users\ShinHyeonJun\Documents\GitHub\BOJ_by_Cpp\BaekJoon_CPlusPlus\BaekJoon_CPlusPlus\11203_BOJ.cpp(45,18): warning C4244: '초기화 중': 'double'에서 '__int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  BaekJoon_CPlusPlus.vcxproj -> C:\Users\ShinHyeonJun\Documents\GitHub\BOJ_by_Cpp\BaekJoon_CPlusPlus\x64\Debug\BaekJoon_CPlusPlus.exe
+﻿  BaekJoon_CPlusPlus.vcxproj -> C:\Users\ShinHyeonJun\Documents\GitHub\BOJ_by_Cpp\BaekJoon_CPlusPlus\x64\Debug\BaekJoon_CPlusPlus.exe
