@@ -57,6 +57,7 @@ int main() {
     int N; cin >> N;
 
     int index = 0;
+
     Node* head = new Node(++index);
 
     tree[0].push_back(head);
