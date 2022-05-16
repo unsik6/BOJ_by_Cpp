@@ -37,4 +37,6 @@ int main()
 	cin.clear();
 	cin.getline(str, l + 1);
 	cout << hashing(str, l);
+
+	delete[] str;
 }
