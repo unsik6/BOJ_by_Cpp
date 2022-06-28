@@ -12,20 +12,18 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-#define MAX 500001
 
-struct info { int pIdx; int lvl; int nodeNum; };
+struct info { int pIdx; int nodeNum; };
 
 vector<int> result;
 
-int elemArr[MAX];
-int parArr[MAX];
-vector<int> children[MAX];
+int* elemArr;
+vector<int>* children;
 
-vector<info> dfsArr[MAX];
-vector<info> dfsrArr[MAX];
+vector<info>* dfsArr;
+vector<info>* dfsrArr;
 
-info DFS(int _root, vector<info>& _dfsArr, int _lvl)
+info DFS(int _root)
 {
 	if (children[_root].empty())
 	{
@@ -36,35 +34,35 @@ info DFS(int _root, vector<info>& _dfsArr, int _lvl)
 		int pdelta = 1;
 		for (int i = 0; i < children[_root].size(); i++)
 		{
-			info childInfo = (DFS(children[_root][i], dfsArr[children[_root][i]], _lvl + 1));
+			info childInfo = (DFS(children[_root][i]));
 			for (int j = 0; j < dfsArr[children[_root][i]].size(); j++)
 			{
-				_dfsArr.push_back(dfsArr[children[_root][i]][j]);
-				_dfsArr[_dfsArr.size() - 1].pIdx += pdelta;
+				dfsArr[_root].push_back(dfsArr[children[_root][i]][j]);
+				dfsArr[_root][dfsArr[_root].size() - 1].pIdx += pdelta;
 			}
 			pdelta++;
-			_dfsArr.push_back(childInfo);
+			dfsArr[_root].push_back(childInfo);
 		}
 	}
-	info tmp{ 0, _lvl, _root };
+	info tmp{ 0, _root };
 	return tmp;	
 }
 
-info rDFS(int _root, vector<info>& _dfsrArr, int _lvl)
+info rDFS(int _root)
 {
 	int pdelta = 1;
 	for (int i = children[_root].size() - 1; i >= 0; i--)
 	{
-		info childInfo = (rDFS(children[_root][i], dfsrArr[children[_root][i]], _lvl + 1));
+		info childInfo = (rDFS(children[_root][i]));
 		for (int j = 0; j < dfsrArr[children[_root][i]].size(); j++)
 		{
-			_dfsrArr.push_back(dfsrArr[children[_root][i]][j]);
-			_dfsrArr[_dfsrArr.size() - 1].pIdx += pdelta;
+			dfsrArr[_root].push_back(dfsrArr[children[_root][i]][j]);
+			dfsrArr[_root][dfsrArr[_root].size() - 1].pIdx += pdelta;
 		}
 		pdelta++;
-		_dfsrArr.push_back(childInfo);
+		dfsrArr[_root].push_back(childInfo);
 	}
-	info tmp{ 0, _lvl, _root };
+	info tmp{ 0, _root };
 	return tmp;
 }
 
@@ -72,6 +70,12 @@ int main()
 {
 	int N;
 	cin >> N;
+
+	elemArr = new int[N + 1];
+	children = new vector<int>[N + 1];
+	dfsArr = new vector<info>[N + 1];
+	dfsrArr = new vector<info>[N + 1];
+
 	for (int i = 1; i <= N; i++)
 	{
 		cin >> elemArr[i];
@@ -81,7 +85,6 @@ int main()
 	{
 		int p, c;
 		cin >> p >> c;
-		parArr[c] = p;
 		children[p].push_back(c);
 	}
 
@@ -91,8 +94,8 @@ int main()
 		sort(children[i].begin(), children[i].end());
 	}
 
-	DFS(1, dfsArr[1], 0);
-	rDFS(1, dfsrArr[1], 0);
+	DFS(1);
+	rDFS(1);
 	
 	for (int i = 1; i <= N; i++)
 	{
@@ -104,8 +107,7 @@ int main()
 			for (int j = 0; j < dfsArr[i].size(); j++)
 			{
 				if (elemArr[dfsArr[i][j].nodeNum] != elemArr[dfsrArr[i][j].nodeNum]
-					|| dfsArr[i][j].pIdx != dfsrArr[i][j].pIdx
-					|| dfsArr[i][j].lvl != dfsArr[i][j].lvl)
+					|| dfsArr[i][j].pIdx != dfsrArr[i][j].pIdx)
 				{
 					isCursed = false;
 					break;
