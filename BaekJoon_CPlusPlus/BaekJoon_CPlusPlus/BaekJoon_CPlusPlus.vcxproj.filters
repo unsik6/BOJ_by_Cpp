@@ -366,10 +366,13 @@
     <ClCompile Include="25205_BOJ_IUPC2022.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="25206_BOJ_IUPC.cpp">
+    <ClCompile Include="25206_BOJ_IUPC2022.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="12851_BOJ.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="25207_BOJ_IUPC2022.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
