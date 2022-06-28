@@ -62,6 +62,32 @@ info rDFS(int _root)
 		pdelta++;
 		dfsrArr[_root].push_back(childInfo);
 	}
+
+	for (int i = 0; i < children[_root].size(); i++)
+	{
+		if (dfsArr[children[_root][i]].empty())
+			continue;
+		else
+		{
+			bool isCursed = true;
+			for (int j = 0; j < dfsArr[children[_root][i]].size(); j++)
+			{
+				if (elemArr[dfsArr[children[_root][i]][j].nodeNum] != elemArr[dfsrArr[children[_root][i]][j].nodeNum]
+					|| dfsArr[children[_root][i]][j].pIdx != dfsrArr[children[_root][i]][j].pIdx)
+				{
+					isCursed = false;
+					break;
+				}
+			}
+			if (isCursed)
+			{
+				result.push_back(children[_root][i]);
+			}
+		}
+		dfsArr[children[_root][i]].clear();
+		dfsrArr[children[_root][i]].clear();
+	}
+
 	info tmp{ 0, _root };
 	return tmp;
 }
@@ -96,28 +122,20 @@ int main()
 
 	DFS(1);
 	rDFS(1);
-	
-	for (int i = 1; i <= N; i++)
+
+	bool isCursed = true;
+	for (int i = 0; i < dfsArr[1].size(); i++)
 	{
-		if (dfsArr[i].empty())
-			continue;
-		else
+		if (elemArr[dfsArr[1][i].nodeNum] != elemArr[dfsrArr[1][i].nodeNum]
+			|| dfsArr[1][i].pIdx != dfsrArr[1][i].pIdx)
 		{
-			bool isCursed = true;
-			for (int j = 0; j < dfsArr[i].size(); j++)
-			{
-				if (elemArr[dfsArr[i][j].nodeNum] != elemArr[dfsrArr[i][j].nodeNum]
-					|| dfsArr[i][j].pIdx != dfsrArr[i][j].pIdx)
-				{
-					isCursed = false;
-					break;
-				}
-			}
-			if (isCursed)
-			{
-				result.push_back(i);
-			}
+			isCursed = false;
+			break;
 		}
+	}
+	if (isCursed && dfsArr[1].size() > 0)
+	{
+		result.push_back(1);
 	}
 
 	sort(result.begin(), result.end());
