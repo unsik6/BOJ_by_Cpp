@@ -16,18 +16,23 @@ using namespace std;
 
 #define position pair<int, int>
 
+// 두 좌표가 주어질 경우의 벡터 구하기 위한 연산자 오버로딩
+// 끝점의 각 좌표와 시작점의 각 좌표를 빼서 벡터의 원소로 저장
 position operator- (const position _left, const position _right)
 {
 	return { _left.first - _right.first, _left.second - _right.second };
 }
 
+// ccw: 세점이 주어질 경우 ccw
 int ccw(position _p1, position _p2, position _p3)
 {
-	position v1 = _p2 - _p1;
-	position v2 = _p3 - _p1;
+	position v1 = _p2 - _p1;	// P1 -> P2 벡터
+	position v2 = _p3 - _p1;	// P1 -> P3 벡터
 
+	// 벡터 외적의 방향만 필요하므로 다음과 같이 계산 후
 	int cross = v1.first * v2.second - v1.second * v2.first;
 
+	// 음수 양수만 판단한다.
 	if (cross > 0) return 1;
 	else if (cross < 0) return -1;
 	else return 0;
