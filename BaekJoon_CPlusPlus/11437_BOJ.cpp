@@ -1,14 +1,14 @@
-/* ¹éÁØ 11437¹ø LCA
+/* ë°±ì¤€ 11437ë²ˆ LCA
 *
-* Input: ³ëµåÀÇ °³¼ö N ( 2<= N <= 50,000 )
-*		 1¹øÀÌ ·çÆ®ÀÎ Æ®¸® ÀÔ·Â -> Æ®¸® ¿¬°áµÈ µÎ ³ëµå ÀÔ·Â
-*		 µÎ ³ëµåÀÇ ½Ö(Äõ¸®ÀÇ ¼ö) M ( 1 <= M <= 10,000 )
+* Input: ë…¸ë“œì˜ ê°œìˆ˜ N ( 2<= N <= 50,000 )
+*		 1ë²ˆì´ ë£¨íŠ¸ì¸ íŠ¸ë¦¬ ìž…ë ¥ -> íŠ¸ë¦¬ ì—°ê²°ëœ ë‘ ë…¸ë“œ ìž…ë ¥
+*		 ë‘ ë…¸ë“œì˜ ìŒ(ì¿¼ë¦¬ì˜ ìˆ˜) M ( 1 <= M <= 10,000 )
 * 
-*		 * °¢ Æ®¸®ÀÇ Á¤Á¡Àº 1~NÀ¸·Î ÀÎµ¦½ÌµÇ¾î ÀÖÀ½
+*		 * ê° íŠ¸ë¦¬ì˜ ì •ì ì€ 1~Nìœ¼ë¡œ ì¸ë±ì‹±ë˜ì–´ ìžˆìŒ
 
-* Output: Äõ¸® ½Ö¿¡ ´ëÇÑ LCA Ãâ·Â
+* Output: ì¿¼ë¦¬ ìŒì— ëŒ€í•œ LCA ì¶œë ¥
 * 
-* Á¦°ð³»
+* ì œê³§ë‚´
 */
 
 #include <iostream>
@@ -25,7 +25,6 @@ int depths[50001]{ 0 };
 int parent[50001]{ 0 };
 
 INT_VEC graph[50001];
-int lcas[10000];
 
 // input
 int n, m;
@@ -34,8 +33,8 @@ int main()
 {
 	cin >> n;
 	
-	// ³ëµå °£ÀÇ °ü°è ÀÔ·Â ¹Þ±â
-	// BFS ÀÌ¿ë
+	// ë…¸ë“œ ê°„ì˜ ê´€ê³„ ìž…ë ¥ ë°›ê¸°
+	// BFS ì´ìš©
 	for (int i = 0; i < n - 1; i++)
 	{
 		int v, w;
@@ -53,7 +52,7 @@ int main()
 
 		for (int i = 0; i < graph[cur].size(); i++)
 		{
-			// ÀÌ¹Ì ¹æ¹®ÇÑ ³ëµå(³ëµå ¹øÈ£ 1 ¶Ç´Â depth°¡ Á¸ÀçÇÔ)´Â ¹æ¹® ¾È ÇÔ
+			// ì´ë¯¸ ë°©ë¬¸í•œ ë…¸ë“œ(ë…¸ë“œ ë²ˆí˜¸ 1 ë˜ëŠ” depthê°€ ì¡´ìž¬í•¨)ëŠ” ë°©ë¬¸ ì•ˆ í•¨
 			if (graph[cur][i] != 1 && parent[graph[cur][i]] == 0)
 			{
 				bfsQ.push(graph[cur][i]);
@@ -63,34 +62,31 @@ int main()
 		}
 	}
 	
-	// Äõ¸® ¼öÇà
+	// ì¿¼ë¦¬ ìˆ˜í–‰
 	cin >> m;
 	for (int i = 0; i < m; i++)
 	{
 		int v, w;
 		cin >> v >> w;
-		// v¸¦ depth°¡ ´õ ÀÛÀº ³ëµå·Î
+		// vë¥¼ depthê°€ ë” ìž‘ì€ ë…¸ë“œë¡œ
 		if (depths[v] > depths[w]) v ^= w ^= v ^= w;
 		
-		// depths ¸ÂÃß±â
+		// depths ë§žì¶”ê¸°
 		while(depths[w] != depths[v])
 			w = parent[w];
 
-		// °Å½½·¯ ¿Ã¶ó°¡±â
-		// ¸¸¾à v¿Í wÀÇ ºÎ¸ð°¡ °°À» ¶§±îÁö ¿Ã¶ó°¥ °æ¿ì
-		// °Å½½·¯ ¿Ã¶ó°¡±â°¡ ³¡³ª°í parent[v]¸¦ lca¶ó°í ÇÏ¸é ¾È µÈ´Ù.
-		//  v ¶Ç´Â w ³ëµå ÀÚÃ¼°¡ °øÅë Á¶»óÀÌ µÇ´Â caseÀÎ °æ¿ì¸¦ °í·ÁÇØÁà¾ß ÇÑ´Ù.
+		// ê±°ìŠ¬ëŸ¬ ì˜¬ë¼ê°€ê¸°
+		// ë§Œì•½ vì™€ wì˜ ë¶€ëª¨ê°€ ê°™ì„ ë•Œê¹Œì§€ ì˜¬ë¼ê°ˆ ê²½ìš°
+		// ê±°ìŠ¬ëŸ¬ ì˜¬ë¼ê°€ê¸°ê°€ ëë‚˜ê³  parent[v]ë¥¼ lcaë¼ê³  í•˜ë©´ ì•ˆ ëœë‹¤.
+		//  v ë˜ëŠ” w ë…¸ë“œ ìžì²´ê°€ ê³µí†µ ì¡°ìƒì´ ë˜ëŠ” caseì¸ ê²½ìš°ë¥¼ ê³ ë ¤í•´ì¤˜ì•¼ í•œë‹¤.
 		while (w !=v)
 		{
 			w = parent[w];
 			v = parent[v];
 		}
 
-		lcas[i] = v;
+		cout << v << '\n';
 	}
-	
-	for (int i = 0; i < m; i++)
-		cout << lcas[i] << '\n';
 
 	return 0;
 }
