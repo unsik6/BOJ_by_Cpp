@@ -17,17 +17,17 @@ const int M = 1'000'000'007;
 // input & output
 int T, redPaint, bluePaint, caseNum;
 
-// DP: redUseByMaxRadius[maximum_radius][red paint usage]
+// DP: maxRadiusByRedUse[maximum_radius][red paint usage]
 #define MAX_R 502
 #define MAX_PAINT 50000
-int redUseByMaxRadius[MAX_R + 1][MAX_PAINT + 1]{ 0 };
+int maxRadiusByRedUse[MAX_R + 1][MAX_PAINT + 1]{ 0 };
 int sumOfCase[MAX_R + 1][MAX_PAINT + 1]{ 0 };
 
 // preprocessing
 void createDP()
 {
 	// base case [0][0]
-	redUseByMaxRadius[0][0] = 1;
+	maxRadiusByRedUse[0][0] = 1;
 
 	// 현재 케이스를 기준으로 만들 수 있는 [다음 원 추가 케이스]에 경우의 수를 추가
 	// 원이 하나 늘어날 때 경우는 빨강을 사용하는가 안 하는가에 따라 다르다.
@@ -43,29 +43,29 @@ void createDP()
 			// case 1: 다음 원을 빨강으로 그릴 수 있음.
 			if (useRed + r + 1 <= MAX_PAINT)
 			{
-				redUseByMaxRadius[r + 1][useRed + r + 1] += redUseByMaxRadius[r][useRed];
-				redUseByMaxRadius[r + 1][useRed + r + 1] %= M;
+				maxRadiusByRedUse[r + 1][useRed + r + 1] += maxRadiusByRedUse[r][useRed];
+				maxRadiusByRedUse[r + 1][useRed + r + 1] %= M;
 			}
-			
+
 			// case 2: 다음 원에 빨간 페인트 안 쓸거임
-			redUseByMaxRadius[r + 1][useRed] += redUseByMaxRadius[r][useRed];
-			redUseByMaxRadius[r + 1][useRed] %= M;
+			maxRadiusByRedUse[r + 1][useRed] += maxRadiusByRedUse[r][useRed];
+			maxRadiusByRedUse[r + 1][useRed] %= M;
 		}
 	}
 
 	// 누적합 쿼리 전처리
 	for (int r = 0; r <= MAX_R; r++)
 	{
-		sumOfCase[r][0] = redUseByMaxRadius[r][0];
+		sumOfCase[r][0] = maxRadiusByRedUse[r][0];
 		for (int useRed = 1; useRed <= MAX_PAINT; useRed++)
-			sumOfCase[r][useRed] = (sumOfCase[r][useRed - 1] + redUseByMaxRadius[r][useRed]) % M;
+			sumOfCase[r][useRed] = (sumOfCase[r][useRed - 1] + maxRadiusByRedUse[r][useRed]) % M;
 	}
 }
 
 int main()
 {
 	FAST_IO
-	createDP();
+		createDP();
 	cin >> T;
 	for (int t = 0; t < T; t++)
 	{
