@@ -2,6 +2,7 @@
 
 This repository contains source codes of the solutions of the problems provided by [BAEKJOON ONLINE JUDGE](https://www.acmicpc.net/).
 BAEKJOON ONLINE JUDGE provides a lot of good problems including the problems featured in prominent domestic and international competitions.
+There are 172 solutions in this repository.
 The source codes are written using C++, and each file contains the summarization of constraints of input and output of each problem.
 Note that few solutions - actually one problem(25207) - are not working because I am trying to solve the problems.
 And, I tried to solve some problems in this repository in diverse manner, so there are multiple solution files of one problem in this repository.
