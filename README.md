@@ -1,4 +1,4 @@
-# Problem Solving in C++
+# Problem Solving using C++
 
 This repository contains source codes of the solutions of the problems provided by [BAEKJOON ONLINE JUDGE](https://www.acmicpc.net/).
 BAEKJOON ONLINE JUDGE provides a lot of good problems including the problems featured in prominent domestic and international competitions.
